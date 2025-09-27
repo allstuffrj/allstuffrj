@@ -60,13 +60,35 @@
 ## 📈 GitHub Stats
 
 <div align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=allstuffrj&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true"/>
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=allstuffrj&layout=compact&langs_count=8&theme=tokyonight"/>
+  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=allstuffrj&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&hide_border=true&bg_color=0d1117"/>
+  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=allstuffrj&layout=compact&langs_count=10&theme=tokyonight&count_private=true&include_all_commits=true&hide_border=true&bg_color=0d1117"/>
 </div>
 
 <div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=allstuffrj&theme=tokyonight" alt="GitHub Streak" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=allstuffrj&theme=tokyonight&hide_border=true&background=0D1117" alt="GitHub Streak" />
 </div>
+
+<div align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=allstuffrj&theme=tokyo-night&bg_color=0d1117&hide_border=true" alt="Activity Graph" />
+</div>
+
+<!-- Alternative Stats Services for Comparison -->
+<details>
+<summary>📊 Alternative Stats (Click to expand)</summary>
+
+### GitHub Profile Summary Cards
+<div align="center">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=allstuffrj&theme=tokyonight" alt="Profile Details"/>
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=allstuffrj&theme=tokyonight" alt="Repos per Language"/>
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=allstuffrj&theme=tokyonight" alt="Most Commit Language"/>
+</div>
+
+### Metrics (Advanced Analytics)
+<div align="center">
+  <img src="https://metrics.lecoq.io/allstuffrj?template=classic&base.header=0&base.activity=0&base.community=0&base.repositories=0&base.metadata=0&repositories=100&repositories.batch=100&repositories.forks=false&repositories.affiliations=owner&config.timezone=America%2FNew_York" alt="Detailed Metrics"/>
+</div>
+
+</details>
 
 ## 🛠️ Tech Stack & Tools
 
