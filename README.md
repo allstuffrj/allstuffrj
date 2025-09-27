@@ -113,7 +113,6 @@
 [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rahuljalavadiya@gmail.com)
 
 **📧 Business Inquiries:** rahuljalavadiya@gmail.com  
-**🏢 Company:** SRK Web Studio  
 **📱 Specialization:** Cross-platform Mobile App Development
 
 </div>
