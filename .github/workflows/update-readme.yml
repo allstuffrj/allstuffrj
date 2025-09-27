@@ -1,0 +1,125 @@
+name: 🚀 Auto-Update README with Latest Apps
+
+on:
+  # Run twice per week (Monday & Thursday at 6 AM UTC) - Free plan friendly
+  schedule:
+    - cron: '0 6 * * 1,4'
+  
+  # Allow manual trigger (no limits on manual runs)
+  workflow_dispatch:
+  
+  # Run when the auto_fetch_apps.py script is updated
+  push:
+    paths:
+      - 'auto_fetch_apps.py'
+      - '.github/workflows/update-readme.yml'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: 📦 Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests beautifulsoup4 lxml
+    
+    - name: 🔄 Fetch Apps and Generate README
+      run: |
+        echo "🚀 Starting app fetcher..."
+        python auto_fetch_apps.py
+        
+        # Check if README_AUTO.md was generated
+        if [ -f "README_AUTO.md" ]; then
+          echo "✅ README_AUTO.md generated successfully"
+          
+          # Compare with existing README.md
+          if ! cmp -s "README.md" "README_AUTO.md"; then
+            echo "📝 README changes detected, updating..."
+            cp README_AUTO.md README.md
+            echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
+          else
+            echo "📄 No changes detected in README"
+            echo "CHANGES_DETECTED=false" >> $GITHUB_ENV
+          fi
+        else
+          echo "❌ README_AUTO.md not generated"
+          exit 1
+        fi
+    
+    - name: 💾 Commit and Push Changes
+      if: env.CHANGES_DETECTED == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Add files
+        git add README.md apps_data.json
+        
+        # Create commit message with app count
+        APP_COUNT=$(python -c "
+        import json
+        try:
+            with open('apps_data.json', 'r') as f:
+                data = json.load(f)
+            app_store_count = len(data.get('app_store', []))
+            play_store_count = len(data.get('google_play', []))
+            total = app_store_count + play_store_count
+            print(f'🚀 Auto-update: {total} apps ({app_store_count} App Store, {play_store_count} Google Play)')
+        except:
+            print('🚀 Auto-update: Apps refreshed')
+        ")
+        
+        git commit -m "$APP_COUNT" -m "Automatically updated README with latest app information from stores"
+        git push
+        
+        echo "✅ Changes pushed to repository"
+    
+    - name: 📊 Summary
+      run: |
+        echo "## 🎯 App Fetch Summary" >> $GITHUB_STEP_SUMMARY
+        
+        if [ -f "apps_data.json" ]; then
+          python -c "
+          import json
+          from datetime import datetime
+          
+          with open('apps_data.json', 'r') as f:
+              data = json.load(f)
+          
+          app_store_apps = data.get('app_store', [])
+          play_store_apps = data.get('google_play', [])
+          
+          print('| Platform | Apps Found | Status |')
+          print('|----------|------------|--------|')
+          print(f'| 🍎 App Store | {len(app_store_apps)} | ✅ Success |')
+          print(f'| 🤖 Google Play | {len(play_store_apps)} | ✅ Success |')
+          print(f'| **Total** | **{len(app_store_apps) + len(play_store_apps)}** | **Updated** |')
+          print()
+          print('### 📱 Apps Found:')
+          
+          for app in app_store_apps:
+              print(f\"- 🍎 {app.get('name', 'Unknown')} (Rating: {app.get('rating', 'N/A')}/5)\")
+          
+          for app in play_store_apps:
+              print(f\"- 🤖 {app.get('name', 'Unknown')} (Rating: {app.get('rating', 'N/A')}/5)\")
+          " >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ "$CHANGES_DETECTED" = "true" ]; then
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **README.md updated with latest app information**" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📄 **No changes detected - README is up to date**" >> $GITHUB_STEP_SUMMARY
+        fi
