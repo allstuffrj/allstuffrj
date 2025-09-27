@@ -1,10 +1,12 @@
 # 🚀 Welcome to Rahul Jalavadiya's Digital Universe
 | **Memory Dare: First or Worst** | 🎮 | ⭐ 5.0/5 | [![Google Play](https://img.shields.io/badge/Google_Play-34A853?style=for-the-badge&logo=google-play&logoColor=white)](https://play.google.com/store/apps/details?id=com.shreeramkrishna.firstorworst.spinthebottle.players.game) |
-| **Word Search Game** | 🎮 | ⭐ 5.0/5 | [![Google Play](https://img.shields.io/badge/Google_Play-34A853?style=for-the-badge&logo=google-play&logoColor=white)](https://play.google.com/store/apps/details?id=com.shreeramkrishna.wordsearch.spelling.checker) |iv align="center">
+| **Word Search Game** | 🎮 | ⭐ 5.0/5 | [![Google Play](https://img.shields.io/badge/Google_Play-34A853?style=for-the-badge&logo=google-play&logoColor=white)](https://play.google.com/store/apps/details?id=com.shreeramkrishna.wordsearch.spelling.checker) 
+
+<div align="center">
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=28&duration=3000&pause=1000&color=36BCF7&background=00000000&center=true&vCenter=true&multiline=true&width=600&height=100&lines=📱+Mobile+App+Developer;🎯+18%2B+Apps+Published;⭐+4.9%2F5+Average+Rating;🌍+5+Languages+%7C+SRKWebstudio" alt="Dynamic Typing" />
 </div>
 
-<div align='center'>
+<div align="center">
 
 [![Portfolio](https://img.shields.io/badge/📱_Portfolio-18_Apps_Live-success?style=for-the-badge&labelColor=000000)](https://github.com/allstuffrj)
 [![App Store](https://img.shields.io/badge/🍎_App_Store-9_Apps-0D96F6?style=for-the-badge&logo=app-store&logoColor=white)](https://apps.apple.com/us/developer/rahul-jalavadiya/id1759541512)
@@ -20,7 +22,7 @@
 
 ### 🌍 Language Learning Suite
 
-<div align='center'>
+<div align="center">
 
 | App | Icon | Rating | Store |
 |-----|------|--------|-------|
