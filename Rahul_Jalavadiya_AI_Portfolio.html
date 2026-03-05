@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahul Jalavadiya — AI Engineering Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --indigo:     #4F46E5;
+    --indigo-mid: #6366F1;
+    --indigo-lt:  #EEF2FF;
+    --indigo-bdr: #C7D2FE;
+    --navy:       #0F172A;
+    --dark:       #1E293B;
+    --slate:      #334155;
+    --muted:      #64748B;
+    --light:      #94A3B8;
+    --border:     #E2E8F0;
+    --bg:         #F8FAFC;
+    --white:      #FFFFFF;
+    --green:      #059669;
+    --green-lt:   #ECFDF5;
+    --amber:      #D97706;
+    --amber-lt:   #FFFBEB;
+    --purple:     #7C3AED;
+    --purple-lt:  #F5F3FF;
+    --teal:       #0891B2;
+    --teal-lt:    #F0F9FF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; font-size: 13px; }
+    .page-break { page-break-before: always; }
+    .no-print { display: none; }
+    .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+    padding: 64px 0 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(99,102,241,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(99,102,241,0.15);
+    border: 1px solid rgba(99,102,241,0.3);
+    color: #A5B4FC;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-badge::before { content: '●'; color: #6EE7B7; font-size: 8px; }
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: #818CF8; }
+  .hero-title {
+    font-size: 18px;
+    color: #94A3B8;
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+  .hero-title strong { color: #C7D2FE; font-weight: 600; }
+
+  /* contact row */
+  .contact-row {
+    display: flex; flex-wrap: wrap; gap: 20px;
+    margin-bottom: 40px;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 8px;
+    color: #94A3B8; font-size: 13px;
+  }
+  .contact-item a { color: #818CF8; text-decoration: none; }
+  .contact-item .icon {
+    width: 28px; height: 28px;
+    background: rgba(99,102,241,0.15);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+  }
+
+  /* stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-val {
+    font-size: 28px;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-val.indigo { color: #818CF8; }
+  .stat-val.green  { color: #6EE7B7; }
+  .stat-val.amber  { color: #FCD34D; }
+  .stat-val.pink   { color: #F9A8D4; }
+  .stat-val.blue   { color: #93C5FD; }
+  .stat-lbl { font-size: 11px; color: #64748B; font-weight: 500; line-height: 1.3; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 56px 0; }
+  .section + .section { border-top: 1px solid var(--border); }
+
+  .section-label {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 32px;
+  }
+  .section-label .dot {
+    width: 8px; height: 8px;
+    background: var(--indigo-mid);
+    border-radius: 50%;
+  }
+  .section-label h2 {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--indigo-mid);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .section-sub {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    max-width: 640px;
+  }
+
+  /* ── PROJECT CARDS ── */
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .project-header {
+    padding: 28px 32px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .project-header-left { flex: 1; }
+  .project-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .badge-ai     { background: var(--indigo-lt); color: var(--indigo); }
+  .badge-mobile { background: #FFF7ED; color: #C2410C; }
+  .badge-saas   { background: var(--green-lt); color: var(--green); }
+  .badge-platform { background: var(--purple-lt); color: var(--purple); }
+
+  .project-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .project-subtitle {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .project-meta {
+    display: flex; flex-direction: column; gap: 6px; align-items: flex-end;
+    flex-shrink: 0;
+  }
+  .project-status {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600;
+    color: var(--green);
+  }
+  .project-status::before {
+    content: '●'; font-size: 8px; color: var(--green);
+  }
+  .project-year {
+    font-size: 12px; color: var(--light); font-weight: 500;
+  }
+
+  .project-body { padding: 24px 32px; }
+  .project-desc {
+    font-size: 14px;
+    color: var(--slate);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  /* feature grid */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .feature-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .feature-icon {
+    font-size: 18px; flex-shrink: 0; margin-top: 1px;
+  }
+  .feature-text strong {
+    display: block;
+    font-size: 13px; font-weight: 600; color: var(--dark);
+    margin-bottom: 2px;
+  }
+  .feature-text span {
+    font-size: 12px; color: var(--muted); line-height: 1.5;
+  }
+
+  /* tech stack */
+  .stack-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 0;
+  }
+  .tech-tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--slate);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .tech-tag.highlight {
+    background: var(--indigo-lt);
+    border-color: var(--indigo-bdr);
+    color: var(--indigo);
+  }
+
+  /* metrics row */
+  .metrics-row {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .metric-pill {
+    background: var(--indigo-lt);
+    border: 1px solid var(--indigo-bdr);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--indigo);
+  }
+  .metric-pill.green {
+    background: var(--green-lt);
+    border-color: #A7F3D0;
+    color: var(--green);
+  }
+  .metric-pill.amber {
+    background: var(--amber-lt);
+    border-color: #FDE68A;
+    color: var(--amber);
+  }
+
+  /* ── ARCHITECTURE DIAGRAM ── */
+  .arch-diagram {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .arch-diagram::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 40px,
+      rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px
+    ),
+    repeating-linear-gradient(
+      90deg, transparent, transparent 40px,
+      rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px
+    );
+  }
+  .arch-inner { position: relative; z-index: 1; }
+  .arch-title {
+    font-size: 11px; font-weight: 600; color: #4F46E5;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .arch-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; margin-bottom: 0;
+  }
+  .arch-node {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    min-width: 110px;
+  }
+  .arch-node.accent {
+    background: rgba(99,102,241,0.2);
+    border-color: rgba(99,102,241,0.4);
+  }
+  .arch-node.output {
+    background: rgba(16,185,129,0.15);
+    border-color: rgba(16,185,129,0.3);
+  }
+  .arch-node-icon { font-size: 18px; margin-bottom: 4px; }
+  .arch-node-label {
+    font-size: 11px; font-weight: 600; color: #E2E8F0;
+    white-space: nowrap;
+  }
+  .arch-node-sub {
+    font-size: 10px; color: #64748B;
+    margin-top: 2px;
+  }
+  .arch-arrow {
+    color: #4F46E5; font-size: 18px;
+    padding: 0 8px; flex-shrink: 0;
+  }
+  .arch-agents {
+    display: flex; gap: 8px;
+  }
+  .arch-agent {
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 8px 12px;
+    text-align: center;
+    min-width: 90px;
+  }
+  .arch-agent-label { font-size: 11px; font-weight: 600; }
+  .arch-agent-sub   { font-size: 10px; color: #64748B; }
+
+  /* ── APP GRID ── */
+  .app-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .app-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .app-icon { font-size: 28px; margin-bottom: 8px; }
+  .app-name { font-size: 12px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .app-cat  { font-size: 11px; color: var(--muted); }
+  .app-rating { font-size: 11px; color: var(--amber); font-weight: 600; margin-top: 4px; }
+
+  /* ── SKILLS SECTION ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .skill-group {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .skill-group-title {
+    font-size: 11px; font-weight: 700; color: var(--indigo);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-list {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .skill-chip {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 9px;
+    font-size: 12px;
+    color: var(--slate);
+    font-weight: 500;
+  }
+
+  /* ── CERTS ── */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .cert-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .cert-icon {
+    width: 40px; height: 40px;
+    background: var(--indigo-lt);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .cert-name { font-size: 13px; font-weight: 600; color: var(--dark); }
+  .cert-issuer { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .cert-year { font-size: 11px; color: var(--light); margin-top: 2px; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 7px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -25px; top: 7px;
+    width: 10px; height: 10px;
+    background: var(--indigo-mid);
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 2px var(--indigo-mid);
+  }
+  .tl-period {
+    font-size: 11px; font-weight: 600; color: var(--indigo);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .tl-title {
+    font-size: 16px; font-weight: 700; color: var(--navy);
+    margin-bottom: 2px;
+  }
+  .tl-company {
+    font-size: 13px; color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .tl-desc {
+    font-size: 13px; color: var(--slate); line-height: 1.65;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: linear-gradient(135deg, #0F172A, #1E1B4B);
+    border-radius: 16px;
+    padding: 48px;
+    text-align: center;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .cta-section h2 {
+    font-size: 28px; font-weight: 700; color: #FFFFFF;
+    margin-bottom: 12px;
+  }
+  .cta-section p {
+    font-size: 15px; color: #94A3B8;
+    margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto;
+  }
+  .cta-links {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  }
+  .cta-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(99,102,241,0.15);
+    border: 1px solid rgba(99,102,241,0.3);
+    color: #A5B4FC;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    text-decoration: none;
+  }
+  .cta-link.primary {
+    background: #4F46E5;
+    border-color: #4F46E5;
+    color: #FFFFFF;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy);
+    color: #475569;
+    text-align: center;
+    padding: 28px;
+    font-size: 12px;
+  }
+  .footer strong { color: #94A3B8; }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-badge">AI Engineering Portfolio · 2025</div>
+    <h1>Rahul <span>Jalavadiya</span></h1>
+    <p class="hero-title">
+      <strong>AI Engineer & Full-Stack Architect</strong> &nbsp;·&nbsp;
+      Multi-Agent Systems &nbsp;·&nbsp; LLM Orchestration &nbsp;·&nbsp; RAG Pipelines &nbsp;·&nbsp; 13+ Years
+    </p>
+
+    <div class="contact-row">
+      <div class="contact-item">
+        <div class="icon">📧</div>
+        rahuljalavadiya@gmail.com
+      </div>
+      <div class="contact-item">
+        <div class="icon">📍</div>
+        Gujarat, India · Available Remote
+      </div>
+      <div class="contact-item">
+        <div class="icon">💻</div>
+        <a href="https://github.com/allstuffrj">github.com/allstuffrj</a>
+      </div>
+      <div class="contact-item">
+        <div class="icon">🔗</div>
+        <a href="https://linkedin.com/in/rahulzalavadiya">linkedin.com/in/rahulzalavadiya</a>
+      </div>
+      <div class="contact-item">
+        <div class="icon">🌐</div>
+        <a href="https://alldevtoolshub.com">alldevtoolshub.com</a>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-val indigo">13+</div>
+        <div class="stat-lbl">Years Engineering Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val green">18</div>
+        <div class="stat-lbl">Published Mobile Apps</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val amber">4.9★</div>
+        <div class="stat-lbl">Average App Rating</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val pink">100s</div>
+        <div class="stat-lbl">AI Platform Active Users</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val blue">800+</div>
+        <div class="stat-lbl">Enterprise Clients Served</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECT 1 — MULTI-AGENT PLATFORM ══════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">
+      <div class="dot"></div>
+      <h2>Featured AI Project</h2>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-header-left">
+          <span class="project-badge badge-ai">🤖 Multi-Agent AI System</span>
+          <div class="project-title">Multi-Agent AI Collaboration Platform</div>
+          <div class="project-subtitle">Enterprise-grade AI workspace — Claude · ChatGPT · Gemini · Custom Agents</div>
+        </div>
+        <div class="project-meta">
+          <div class="project-status">Live in Production</div>
+          <div class="project-year">2024 – Present</div>
+        </div>
+      </div>
+      <div class="project-body">
+
+        <div class="metrics-row">
+          <span class="metric-pill">Hundreds of Active Users</span>
+          <span class="metric-pill green">Production Deployed</span>
+          <span class="metric-pill amber">5+ AI Models Integrated</span>
+        </div>
+
+        <p class="project-desc">
+          Designed and built an enterprise-grade AI collaboration platform that unifies multiple large language models in a single workspace. Users can @tag Claude, ChatGPT, Gemini, OpenAI, and custom agents simultaneously — all sharing full conversation context and responding in parallel. The platform features a self-evaluation engine where agents autonomously score and critique each other's outputs, surfacing the highest-quality response. Built entirely from scratch as lead architect and engineer.
+        </p>
+
+        <!-- Architecture diagram -->
+        <div class="arch-diagram">
+          <div class="arch-inner">
+            <div class="arch-title">System Architecture</div>
+            <div style="display:flex; align-items:center; justify-content:center; gap:0; flex-wrap:wrap; row-gap:16px;">
+              <div class="arch-node">
+                <div class="arch-node-icon">👤</div>
+                <div class="arch-node-label">User Request</div>
+                <div class="arch-node-sub">@tag agents</div>
+              </div>
+              <div class="arch-arrow">→</div>
+              <div class="arch-node accent">
+                <div class="arch-node-icon">🧠</div>
+                <div class="arch-node-label">Orchestrator</div>
+                <div class="arch-node-sub">Context injection</div>
+              </div>
+              <div class="arch-arrow">→</div>
+              <div class="arch-agents">
+                <div class="arch-agent">
+                  <div class="arch-agent-label" style="color:#10B981;">GPT-4</div>
+                  <div class="arch-agent-sub">OpenAI</div>
+                </div>
+                <div class="arch-agent">
+                  <div class="arch-agent-label" style="color:#F59E0B;">Claude</div>
+                  <div class="arch-agent-sub">Anthropic</div>
+                </div>
+                <div class="arch-agent">
+                  <div class="arch-agent-label" style="color:#3B82F6;">Gemini</div>
+                  <div class="arch-agent-sub">Google</div>
+                </div>
+              </div>
+              <div class="arch-arrow">→</div>
+              <div class="arch-node" style="background:rgba(245,158,11,0.15);border-color:rgba(245,158,11,0.3);">
+                <div class="arch-node-icon">⚖️</div>
+                <div class="arch-node-label">Self-Evaluator</div>
+                <div class="arch-node-sub">Scores responses</div>
+              </div>
+              <div class="arch-arrow">→</div>
+              <div class="arch-node output">
+                <div class="arch-node-icon">✅</div>
+                <div class="arch-node-label">Best Output</div>
+                <div class="arch-node-sub">+ AI content</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <div class="feature-icon">🤖</div>
+            <div class="feature-text">
+              <strong>Multi-Agent Orchestration</strong>
+              <span>@tag multiple AI models simultaneously. All agents share context and respond in parallel within a single thread.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">⚖️</div>
+            <div class="feature-text">
+              <strong>Self-Evaluation Engine</strong>
+              <span>Agents autonomously score and critique each other's responses, surfacing the highest-quality answer.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🔍</div>
+            <div class="feature-text">
+              <strong>RAG & Vector Search</strong>
+              <span>Document ingestion (PDF, DOCX), text embeddings, pgvector semantic search — responses grounded in your data.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">💬</div>
+            <div class="feature-text">
+              <strong>Contextual Memory</strong>
+              <span>Full conversation history injected dynamically across agent calls for coherent multi-turn reasoning.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🎨</div>
+            <div class="feature-text">
+              <strong>AI Content Generation</strong>
+              <span>On-demand image generation (DALL·E), formatted PDF reports, and DOCX documents from agent outputs.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">👥</div>
+            <div class="feature-text">
+              <strong>Participant System</strong>
+              <span>Invite human collaborators; @tag them alongside AI agents for hybrid human-AI workflows.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stack-row">
+          <span class="tech-tag highlight">Node.js</span>
+          <span class="tech-tag highlight">NestJS</span>
+          <span class="tech-tag highlight">TypeScript</span>
+          <span class="tech-tag highlight">OpenAI API</span>
+          <span class="tech-tag highlight">Claude API</span>
+          <span class="tech-tag highlight">Gemini API</span>
+          <span class="tech-tag highlight">pgvector</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Redis</span>
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">AWS Lambda</span>
+          <span class="tech-tag">AWS EC2</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">n8n</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROJECT 2 — AllDevToolsHub ── -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-header-left">
+          <span class="project-badge badge-saas">🌐 SaaS Platform</span>
+          <div class="project-title">All Dev Tools Hub</div>
+          <div class="project-subtitle">alldevtoolshub.com — Developer productivity platform</div>
+        </div>
+        <div class="project-meta">
+          <div class="project-status">Live</div>
+          <div class="project-year">Indie Product</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="metrics-row">
+          <span class="metric-pill">100+ Tools</span>
+          <span class="metric-pill green">1,000–10,000 Monthly Visits</span>
+          <span class="metric-pill amber">SEO-Driven Organic Growth</span>
+        </div>
+        <p class="project-desc">
+          Independently designed, built and launched a developer productivity platform offering 100+ tools used by developers worldwide. Built with SEO-optimised architecture generating consistent organic traffic. Covers JSON formatters, encoders/decoders, code beautifiers, converters, and AI-powered developer utilities.
+        </p>
+        <div class="stack-row">
+          <span class="tech-tag highlight">Next.js</span>
+          <span class="tech-tag highlight">React</span>
+          <span class="tech-tag">PHP</span>
+          <span class="tech-tag">MySQL</span>
+          <span class="tech-tag">SEO Architecture</span>
+          <span class="tech-tag">AWS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROJECT 3 — FinWiseCalc ── -->
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-header-left">
+          <span class="project-badge badge-saas">💰 FinTech Platform</span>
+          <div class="project-title">FinWiseCalc</div>
+          <div class="project-subtitle">finwisecalc.com — Financial calculator suite</div>
+        </div>
+        <div class="project-meta">
+          <div class="project-status">Live</div>
+          <div class="project-year">Indie Product</div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">
+          Built a comprehensive financial planning platform covering investment calculators, loan EMI tools, SIP calculators, retirement planners, and tax tools. SEO-driven architecture with strong organic traffic growth. Designed for accessibility and speed across mobile and desktop.
+        </p>
+        <div class="stack-row">
+          <span class="tech-tag highlight">Next.js</span>
+          <span class="tech-tag highlight">React</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">SEO Architecture</span>
+          <span class="tech-tag">AWS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MOBILE APPS ══════════════════════════════════════════════════════ -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-label">
+      <div class="dot"></div>
+      <h2>Mobile App Portfolio</h2>
+    </div>
+    <h2 class="section-title">18 Published Apps · iOS & Android</h2>
+    <p class="section-sub">Thousands of downloads · 4.9★ average rating across App Store and Google Play</p>
+
+    <div class="metrics-row" style="margin-bottom:28px;">
+      <span class="metric-pill">18 Apps Published</span>
+      <span class="metric-pill green">4.9★ Average Rating</span>
+      <span class="metric-pill amber">Thousands of Downloads</span>
+      <span class="metric-pill" style="background:var(--purple-lt);border-color:#DDD6FE;color:var(--purple);">iOS + Android</span>
+    </div>
+
+    <div class="app-grid">
+      <div class="app-card">
+        <div class="app-icon">🤖</div>
+        <div class="app-name">AI Art Generator</div>
+        <div class="app-cat">AI · Creative</div>
+        <div class="app-rating">⭐ 4.9</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🍳</div>
+        <div class="app-name">Recipe Ingredient Finder</div>
+        <div class="app-cat">AI · Lifestyle</div>
+        <div class="app-rating">⭐ 4.9</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🇨🇳</div>
+        <div class="app-name">Learn Chinese: Verb Forms</div>
+        <div class="app-cat">Education · Language</div>
+        <div class="app-rating">⭐ 5.0</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🇫🇷</div>
+        <div class="app-name">Learn French: Verb Forms</div>
+        <div class="app-cat">Education · Language</div>
+        <div class="app-rating">⭐ 5.0</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🇷🇺</div>
+        <div class="app-name">Learn Russian: Verb Forms</div>
+        <div class="app-cat">Education · Language</div>
+        <div class="app-rating">⭐ 5.0</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🇪🇸</div>
+        <div class="app-name">Learn Spanish: Verb Forms</div>
+        <div class="app-cat">Education · Language</div>
+        <div class="app-rating">⭐ 5.0</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🇩🇪</div>
+        <div class="app-name">Verb Forms: German</div>
+        <div class="app-cat">Education · Language</div>
+        <div class="app-rating">⭐ 5.0</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🇺🇸</div>
+        <div class="app-name">Verb Forms: English</div>
+        <div class="app-cat">Education · Language</div>
+        <div class="app-rating">⭐ 4.3</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">⌨️</div>
+        <div class="app-name">Typr Go: Typing Master</div>
+        <div class="app-cat">Games · Education</div>
+        <div class="app-rating">⭐ 5.0</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🔤</div>
+        <div class="app-name">Word Search Game</div>
+        <div class="app-cat">Games · Puzzle</div>
+        <div class="app-rating">⭐ 5.0</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🎮</div>
+        <div class="app-name">Memory Dare: First or Worst</div>
+        <div class="app-cat">Games · Party</div>
+        <div class="app-rating">⭐ 5.0</div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🚗</div>
+        <div class="app-name">Canada Driving Test Prep</div>
+        <div class="app-cat">Education · Utility</div>
+        <div class="app-rating">⭐ 4.9</div>
+      </div>
+    </div>
+
+    <div class="stack-row">
+      <span class="tech-tag highlight">React Native</span>
+      <span class="tech-tag highlight">Expo</span>
+      <span class="tech-tag highlight">TypeScript</span>
+      <span class="tech-tag highlight">OpenAI API</span>
+      <span class="tech-tag">AWS Lambda</span>
+      <span class="tech-tag">PostgreSQL</span>
+      <span class="tech-tag">Firebase</span>
+      <span class="tech-tag">App Store Connect</span>
+      <span class="tech-tag">Google Play Console</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TECHNICAL SKILLS ══════════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">
+      <div class="dot"></div>
+      <h2>Technical Skills</h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">🤖 AI & LLMs</div>
+        <div class="skill-list">
+          <span class="skill-chip">OpenAI API</span>
+          <span class="skill-chip">Claude API</span>
+          <span class="skill-chip">Gemini API</span>
+          <span class="skill-chip">Multi-Agent Systems</span>
+          <span class="skill-chip">RAG Pipelines</span>
+          <span class="skill-chip">Vector Search</span>
+          <span class="skill-chip">pgvector</span>
+          <span class="skill-chip">Embeddings</span>
+          <span class="skill-chip">DALL·E</span>
+          <span class="skill-chip">Prompt Engineering</span>
+          <span class="skill-chip">n8n Automation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">💻 Backend & APIs</div>
+        <div class="skill-list">
+          <span class="skill-chip">Node.js</span>
+          <span class="skill-chip">NestJS</span>
+          <span class="skill-chip">TypeScript</span>
+          <span class="skill-chip">PHP</span>
+          <span class="skill-chip">GraphQL</span>
+          <span class="skill-chip">REST APIs</span>
+          <span class="skill-chip">WebSockets</span>
+          <span class="skill-chip">Microservices</span>
+          <span class="skill-chip">Multi-Tenant SaaS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">🎨 Frontend & Mobile</div>
+        <div class="skill-list">
+          <span class="skill-chip">React</span>
+          <span class="skill-chip">Next.js</span>
+          <span class="skill-chip">React Native</span>
+          <span class="skill-chip">Expo</span>
+          <span class="skill-chip">Tailwind CSS</span>
+          <span class="skill-chip">TypeScript</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">🗄️ Databases</div>
+        <div class="skill-list">
+          <span class="skill-chip">PostgreSQL</span>
+          <span class="skill-chip">pgvector</span>
+          <span class="skill-chip">MySQL</span>
+          <span class="skill-chip">Redis</span>
+          <span class="skill-chip">Query Optimisation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">☁️ Cloud & DevOps</div>
+        <div class="skill-list">
+          <span class="skill-chip">AWS Lambda</span>
+          <span class="skill-chip">API Gateway</span>
+          <span class="skill-chip">EC2</span>
+          <span class="skill-chip">Docker</span>
+          <span class="skill-chip">Kubernetes</span>
+          <span class="skill-chip">CI/CD</span>
+          <span class="skill-chip">Grafana</span>
+          <span class="skill-chip">Serverless</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">🏗️ Architecture</div>
+        <div class="skill-list">
+          <span class="skill-chip">System Design</span>
+          <span class="skill-chip">Scalable SaaS</span>
+          <span class="skill-chip">Multi-Tenant</span>
+          <span class="skill-chip">API Design</span>
+          <span class="skill-chip">12-Factor App</span>
+          <span class="skill-chip">Serverless Architecture</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CERTIFICATIONS ════════════════════════════════════════════════════ -->
+<section class="section" style="background:var(--white);">
+  <div class="container">
+    <div class="section-label">
+      <div class="dot"></div>
+      <h2>Certifications</h2>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-item">
+        <div class="cert-icon">⚡</div>
+        <div>
+          <div class="cert-name">n8n: Zero to Hero</div>
+          <div class="cert-issuer">KodeKloud</div>
+          <div class="cert-year">September 2025</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">🤖</div>
+        <div>
+          <div class="cert-name">AI Free Week Course</div>
+          <div class="cert-issuer">KodeKloud</div>
+          <div class="cert-year">September 2025</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">🔧</div>
+        <div>
+          <div class="cert-name">DevOps Pre-Requisite Course</div>
+          <div class="cert-issuer">KodeKloud</div>
+          <div class="cert-year">March 2025</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">🐳</div>
+        <div>
+          <div class="cert-name">Docker Training for the Absolute Beginner</div>
+          <div class="cert-issuer">KodeKloud</div>
+          <div class="cert-year">March 2024</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">📐</div>
+        <div>
+          <div class="cert-name">12 Factor App</div>
+          <div class="cert-issuer">KodeKloud</div>
+          <div class="cert-year">April 2024</div>
+        </div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon">📘</div>
+        <div>
+          <div class="cert-name">Advanced TypeScript Concepts</div>
+          <div class="cert-issuer">LinkedIn Learning</div>
+          <div class="cert-year">–</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE TIMELINE ═══════════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-label">
+      <div class="dot"></div>
+      <h2>Experience</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-period">Nov 2021 – Present</div>
+        <div class="tl-title">Independent Consultant — AI Engineer & Technical Architect</div>
+        <div class="tl-company">Freelance · Remote</div>
+        <div class="tl-desc">
+          Built and shipped production multi-agent AI platform (Claude + ChatGPT + Gemini) serving hundreds of users. Published 18 mobile apps across iOS and Android achieving thousands of downloads and 4.9★ rating. Launched AllDevToolsHub (100+ tools, 1,000–10,000 monthly visits) and FinWiseCalc. Architected serverless AWS platforms, multi-tenant NestJS SaaS backends, and CI/CD pipelines.
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-period">Oct 2018 – Nov 2021</div>
+        <div class="tl-title">Project Development Manager</div>
+        <div class="tl-company">Netsol IT Solutions Pvt. Ltd.</div>
+        <div class="tl-desc">
+          Led development of Residential-Commercial Management System (myciti.in) and Smart Parking Platform (park360.io). Managed cross-functional teams of 4–100 members, delivered enterprise solutions for 800+ global clients using Agile methodologies.
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-period">Oct 2016 – Oct 2018</div>
+        <div class="tl-title">Development Team Lead</div>
+        <div class="tl-company">Netsol IT Solutions Pvt. Ltd.</div>
+        <div class="tl-desc">
+          Led and mentored a team of developers on complex systems — MLM platforms, real-time Socket.io applications, POS systems. Established engineering best practices and code review culture.
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-period">Oct 2012 – Oct 2016</div>
+        <div class="tl-title">Senior Developer → Junior Developer</div>
+        <div class="tl-company">Netsol IT Solutions Pvt. Ltd.</div>
+        <div class="tl-desc">
+          Built enterprise ERP, restaurant and retail POS, school management systems, and hospitality platforms serving 800+ global clients. Designed internal MVC PHP frameworks accelerating team development velocity.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ════════════════════════════════════════════════════════════════ -->
+<div class="container">
+  <div class="cta-section">
+    <h2>Let's Build Something Intelligent</h2>
+    <p>Available for AI engineering projects, full-stack development, React Native apps, and technical consulting — remote worldwide.</p>
+    <div class="cta-links">
+      <a class="cta-link primary" href="mailto:rahuljalavadiya@gmail.com">📧 rahuljalavadiya@gmail.com</a>
+      <a class="cta-link" href="https://github.com/allstuffrj">💻 github.com/allstuffrj</a>
+      <a class="cta-link" href="https://alldevtoolshub.com">🌐 alldevtoolshub.com</a>
+      <a class="cta-link" href="https://finwisecalc.com">💰 finwisecalc.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ═════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <strong>Rahul Jalavadiya</strong> · AI Engineer & Full-Stack Architect · Gujarat, India · Available Remote<br>
+  <span style="margin-top:6px;display:block;">rahuljalavadiya@gmail.com · github.com/allstuffrj · linkedin.com/in/rahulzalavadiya</span>
+</footer>
+
+</body>
+</html>
